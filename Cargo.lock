@@ -3,7 +3,7 @@
 version = 4
 
 [[package]]
-name = "NueralArenaRS"
+name = "NueralBinarizedRS"
 version = "0.0.1"
 dependencies = [
  "input_method",
