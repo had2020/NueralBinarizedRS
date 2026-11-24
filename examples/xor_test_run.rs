@@ -1,35 +1,8 @@
-// TODO delete this old commented out code in a future release
-/*
-// Run with cargo run --example xor_test_run
-use NueralArenaRS::*;
-
-const LAYERS: usize = 3;
-
-const INPUTS: usize = 4;
-const HIDDEN: usize = 8;
-const OUTPUT: usize = 1;
-
-fn main() {
-    let model: ModelBuilder<Layer, LAYERS> = ModelBuilder {
-        learning_rate: 0.1,
-        memory_layout: [
-            Layer { x: INPUTS },
-            Layer { x: HIDDEN },
-            Layer { x: OUTPUT },
-        ],
-        activation_layout: [ActFn::Sigmoid, ActFn::Sigmoid, ActFn::Linear],
-    };
-    let mut arena_model = model.allocate();
-    arena_model.init(InitFunc::Zero);
-    arena_model.forward_pass();
-}
-*/
-
 use NueralBinarizedRS::*;
 
 fn main() {
-    let mut layer0 = BinarizedLayer::new(2, 64);
-    let mut layer1 = BinarizedLayer::new(1, 64);
+    let mut layer0 = BinarizedLayer::new(2);
+    let mut layer1 = BinarizedLayer::new(1);
 
     let input0: u64 = 7;
     let input1: u64 = 4;
@@ -80,3 +53,29 @@ fn main() {
         layer0.backward_ste(&input_data, &hidden_errors, None, learning_rate_fp);
     }
 }
+
+/*
+// Run with cargo run --example xor_test_run
+use NueralArenaRS::*;
+
+const LAYERS: usize = 3;
+
+const INPUTS: usize = 4;
+const HIDDEN: usize = 8;
+const OUTPUT: usize = 1;
+
+fn main() {
+    let model: ModelBuilder<Layer, LAYERS> = ModelBuilder {
+        learning_rate: 0.1,
+        memory_layout: [
+            Layer { x: INPUTS },
+            Layer { x: HIDDEN },
+            Layer { x: OUTPUT },
+        ],
+        activation_layout: [ActFn::Sigmoid, ActFn::Sigmoid, ActFn::Linear],
+    };
+    let mut arena_model = model.allocate();
+    arena_model.init(InitFunc::Zero);
+    arena_model.forward_pass();
+}
+*/
