@@ -1,16 +1,16 @@
 use NueralBinarizedRS::*;
 
 fn main() {
-    let mut layer0 = BinarizedLayer::new(2, 128);
-    let mut layer1 = BinarizedLayer::new(1, 64);
+    let mut layer0 = BinarizedLayer::new(2, 1);
+    let mut layer1 = BinarizedLayer::new(1, 1);
 
     let input0: u64 = 7;
     let input1: u64 = 4;
     let target0: u64 = 3;
     let input_data = vec![input0, input1];
 
-    let mut hidden_activations = vec![0; 1];
-    let mut final_activations = vec![0; 1];
+    let mut hidden_activations = vec![0; 2];
+    let mut final_activations = vec![0; 2];
 
     let mut hidden_errors = vec![0; 64];
     let mut final_errors = vec![0; 64];
