@@ -1,8 +1,8 @@
 use NueralBinarizedRS::*;
 
 fn main() {
-    let mut layer0 = BinarizedLayer::new(2);
-    let mut layer1 = BinarizedLayer::new(1);
+    let mut layer0 = BinarizedLayer::new(2, 128);
+    let mut layer1 = BinarizedLayer::new(1, 64);
 
     let input0: u64 = 7;
     let input1: u64 = 4;
@@ -20,8 +20,8 @@ fn main() {
     println!("Target: {:064b}", target0);
 
     for epoch in 0..=2000 {
-        layer0.forward(&input_data, &mut hidden_activations);
-        layer1.forward(&hidden_activations, &mut final_activations);
+        layer0.forward(&input_data, &mut hidden_activations, 128);
+        layer1.forward(&hidden_activations, &mut final_activations, 64);
 
         let current_output = final_activations[0];
         let error_bits = (current_output ^ target0).count_ones();
@@ -46,11 +46,12 @@ fn main() {
         layer1.backward_ste(
             &hidden_activations,
             &final_errors,
+            128,
             Some(&mut hidden_errors),
             learning_rate_fp,
         );
 
-        layer0.backward_ste(&input_data, &hidden_errors, None, learning_rate_fp);
+        layer0.backward_ste(&input_data, &hidden_errors, 64, None, learning_rate_fp);
     }
 }
 
